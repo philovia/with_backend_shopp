@@ -89,7 +89,6 @@ type Product struct {
 	Description string  `json:"description"`
 	Price       float64 `json:"price"`
 	Quantity    int     `json:"quantity"`
-	ImageData   []byte  `json:"image_data"`
 }
 type CartItems struct {
 	ID       uint `json:"id" gorm:"primaryKey"`
@@ -567,11 +566,12 @@ func (r *Repository) AddToCart(ctx *fiber.Ctx) error {
 		})
 		return err
 	}
-	r.CartMap[item.ProductID] += item.Quantity
-	ctx.Status(http.StatusOK).JSON(&fiber.Map{
-		"message": "Product added to cart successfully",
-		"data":    r.CartMap,
-	})
+
+	// r.CartMap[item.ProductID] += item.Quantity
+	// ctx.Status(http.StatusOK).JSON(&fiber.Map{
+	// 	"message": "Product added to cart successfully",
+	// 	"data":    r.CartMap,
+	// })
 	return nil
 }
 
